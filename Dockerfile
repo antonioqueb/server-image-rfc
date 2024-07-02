@@ -1,26 +1,26 @@
-# Use the official Node.js image.
-# https://hub.docker.com/_/node
-FROM node:14
+# Dockerfile
 
-# Create and change to the app directory.
+# Utiliza una imagen base más pequeña y específica para Node.js
+FROM node:14-alpine
+
+# Establece el directorio de trabajo
 WORKDIR /usr/src/app
 
-# Copy application dependency manifests to the container image.
-# A wildcard is used to ensure both package.json AND package-lock.json are copied.
+# Copia los archivos de dependencias del proyecto
 COPY package*.json ./
 
-# Install dependencies.
-RUN npm install
+# Instala las dependencias
+RUN npm install --production
 
-# Install sharp dependencies
-RUN apt-get update && apt-get install -y \
-  libvips-dev
+# Instala las dependencias de sharp
+RUN apk add --no-cache \
+  vips-dev
 
-# Copy the local code to the container image.
+# Copia el código de la aplicación
 COPY . .
 
-# Expose the port the app runs on.
+# Expone el puerto en el que se ejecuta la aplicación
 EXPOSE 3010
 
-# Run the web service on container startup.
-CMD [ "npm", "start" ]
+# Ejecuta el servicio web al iniciar el contenedor
+CMD ["npm", "start"]

@@ -1,3 +1,4 @@
+# docker-compose.yml
 version: '3.8'
 
 services:
@@ -17,7 +18,7 @@ services:
     ports:
       - "3022:81"
     volumes:
-      - ./nginx/nginx_rfc.conf:/etc/nginx/nginx.conf
+      - ./nginx/nginx_rfc.conf:/etc/nginx/nginx.conf:ro
       - rfc_uploads_data:/usr/share/nginx/html/uploads
     depends_on:
       - rfc-uploader
