@@ -5,7 +5,7 @@ services:
     build: .
     container_name: rfc_uploader_service
     ports:
-      - "3010:3010"
+      - "3021:3010"
     volumes:
       - rfc_uploads_data:/usr/src/app/uploads
     environment:
@@ -15,7 +15,7 @@ services:
     image: nginx:latest
     container_name: rfc_uploader_nginx
     ports:
-      - "81:81"
+      - "3022:81"
     volumes:
       - ./nginx/nginx_rfc.conf:/etc/nginx/nginx.conf
       - rfc_uploads_data:/usr/share/nginx/html/uploads
